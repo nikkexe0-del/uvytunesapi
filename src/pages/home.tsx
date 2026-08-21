@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 export const Home = new Hono()
 
 Home.get('/', (c) => {
-  const title = 'uvytunes'
+  const title = 'uvytunes API'
   const description =
     'Unofficial JioSaavn API wrapper in TypeScript. Access songs, albums, artists, playlists, and more.'
   const previewImage =
@@ -17,7 +17,7 @@ Home.get('/', (c) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description} />
-        <meta name="keywords" content="uvytunes, JioSaavn API, Music API, uvytunes API, Songs, Albums, Playlists" />
+        <meta name="keywords" content="uvytunes API, JioSaavn API, Music API, Songs, Albums, Playlists" />
         <meta name="author" content="uvytunes" />
         <link rel="canonical" href={siteUrl} />
         <meta property="og:type" content="website" />
@@ -202,8 +202,8 @@ body {
 .icon-md { width: 16px; height: 16px; }
 .icon-lg { width: 20px; height: 20px; }
 
-.hero-heading { font-size: clamp(40px, 8vw, 64px); }
-.hero-subtitle { font-size: 15px; color: var(--text-soft); line-height: 1.7; }
+.hero-heading { font-size: clamp(40px, 8vw, 64px); text-align: left; }
+.hero-subtitle { font-size: 15px; color: var(--text-soft); line-height: 1.7; text-align: left; }
 .section-heading { font-size: clamp(22px, 4vw, 30px); }
 .feature-desc { font-size: 13px; }
 .copyright { font-size: 11px; }
@@ -213,11 +213,10 @@ body {
         />
       </head>
       <body>
-        <section class="hero py-20 md:py-28 px-6 flex flex-col items-center text-center">
+        <section class="hero py-20 md:py-28 px-6">
           <div class="max-w-2xl mx-auto relative z-10">
-            <span class="mono-label block mb-5 hero-version">v0.1.0 — unofficial</span>
-            <h1 class="heading-display hero-heading">uvytunes</h1>
-            <p class="mt-5 max-w-md mx-auto hero-subtitle">
+            <h1 class="heading-display hero-heading">uvytunes API</h1>
+            <p class="mt-5 max-w-md hero-subtitle">
               Unofficial JioSaavn API. Search, stream, and download songs, albums, artists, and playlists.
             </p>
             <a href="/docs" class="pill pill-primary mt-8">
@@ -298,25 +297,27 @@ body {
           </div>
         </main>
 
-        <footer class="px-6 py-8 flex flex-col items-center text-center" style="border-top: 1px solid var(--border);">
-          <div class="flex flex-wrap justify-center gap-6 mb-4">
-            <a href="/docs" class="footer-link">
-              <i data-lucide="book-open" class="icon-sm"></i>
-              Docs
-            </a>
-            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="footer-link">
-              <i data-lucide="github" class="icon-sm"></i>
-              GitHub
-            </a>
-            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="footer-link">
-              <i data-lucide="instagram" class="icon-sm"></i>
-              Instagram
-            </a>
+        <footer class="px-6 py-8" style="border-top: 1px solid var(--border);">
+          <div class="max-w-2xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex gap-6">
+              <a href="/docs" class="footer-link">
+                <i data-lucide="book-open" class="icon-sm"></i>
+                Docs
+              </a>
+              <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="footer-link">
+                <i data-lucide="github" class="icon-sm"></i>
+                GitHub
+              </a>
+              <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="footer-link">
+                <i data-lucide="instagram" class="icon-sm"></i>
+                Instagram
+              </a>
+            </div>
+            <span class="mono-label copyright flex items-center gap-2">
+              <i data-lucide="music" class="icon-sm"></i>
+              &copy; {new Date().getFullYear()} uvytunes API
+            </span>
           </div>
-          <span class="mono-label copyright flex items-center gap-2">
-            <i data-lucide="music" class="icon-sm"></i>
-            &copy; {new Date().getFullYear()} uvytunes
-          </span>
         </footer>
 
         <script dangerouslySetInnerHTML={{ __html: `lucide.createIcons();` }} />
