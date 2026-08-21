@@ -4,6 +4,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { prettyJSON } from 'hono/pretty-json'
 import { Home } from './pages/home'
+import { Operations } from './pages/operations'
 import type { Routes } from '#common/types'
 import type { HTTPException } from 'hono/http-exception'
 
@@ -27,6 +28,7 @@ export class App {
     })
 
     this.app.route('/', Home)
+    this.app.route('/', Operations)
   }
 
   private initializeGlobalMiddlewares() {

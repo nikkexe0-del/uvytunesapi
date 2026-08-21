@@ -300,6 +300,10 @@ body {
         <footer class="px-6 py-8" style="border-top: 1px solid var(--border);">
           <div class="max-w-2xl mx-auto flex flex-wrap justify-between items-center gap-4">
             <div class="flex gap-6">
+              <a href="/operations" class="footer-link">
+                <i data-lucide="list" class="icon-sm"></i>
+                Operations
+              </a>
               <a href="/docs" class="footer-link">
                 <i data-lucide="book-open" class="icon-sm"></i>
                 Docs
