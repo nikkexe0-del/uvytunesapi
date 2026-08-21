@@ -22,12 +22,12 @@ export const Meteors = ({ number }: { number: number }) => {
 }
 
 Home.get('/', (c) => {
-  const title = 'NepoTune API'
+  const title = 'uvytunes'
   const description =
     'Unofficial JioSaavn API wrapper in TypeScript. Access songs, albums, artists, playlists, and more.'
   const previewImage =
-    'https://raw.githubusercontent.com/Sandipeyy/NepoTuneAPI/main/assets/preview.pnh'
-  const siteUrl = 'https://nepotuneapi.vercel.app/'
+    'https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/preview.png'
+  const siteUrl = 'https://uvytunesapi.vercel.app/'
 
   return c.html(
     <html lang="en">
@@ -38,8 +38,8 @@ Home.get('/', (c) => {
 
         {/* SEO */}
         <meta name="description" content={description} />
-        <meta name="keywords" content="NepoTune, JioSaavn API, Music API, NepoTune API, NepoFlix, Sandipeyy, Songs, Albums, Playlists" />
-        <meta name="author" content="Sandipeyy" />
+        <meta name="keywords" content="uvytunes, JioSaavn API, Music API, uvytunes API, Songs, Albums, Playlists" />
+        <meta name="author" content="uvytunes" />
         <link rel="canonical" href={siteUrl} />
 
         {/* Open Graph */}
@@ -70,7 +70,7 @@ Home.get('/', (c) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
 
@@ -81,7 +81,7 @@ Home.get('/', (c) => {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            * { font-family: 'Inter', sans-serif; } 
+            * { font-family: 'IBM Plex Mono', monospace; } 
             body {
               background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
               background-size: 400% 400%;
@@ -130,14 +130,14 @@ Home.get('/', (c) => {
           {/* Sticky Responsive Header */}
           <header class="sticky top-0 z-50 bg-black/70 backdrop-blur-md flex flex-col sm:flex-row items-center sm:items-end space-y-2 sm:space-y-0 sm:space-x-3 mb-6 p-3 rounded-lg">
             <img
-              src="https://raw.githubusercontent.com/Sandipeyy/NepoTuneAPI/main/assets/logo.png"
-              alt="NepoTune Logo"
+              src="https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/logo.png"
+              alt="uvytunes Logo"
               class="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 object-contain"
               loading="lazy"
             />
             <h1 class="flex flex-col sm:flex-row items-start sm:items-end space-y-1 sm:space-y-0 sm:space-x-2 text-center sm:text-left">
               <span class="bg-gradient-to-r from-purple-500 to-gray-800 bg-clip-text text-transparent text-xl sm:text-3xl md:text-4xl font-bold">
-                NepoTune API
+                uvytunes
               </span>
               <span class="unofficial-tag rounded bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%] p-1 text-xs sm:text-sm md:text-base uppercase tracking-wider text-white">
                 Unofficial
@@ -167,47 +167,6 @@ Home.get('/', (c) => {
               </div>
             </a>
 
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View GitHub Source Code"
-              class="card p-4 sm:p-6 hover:bg-opacity-5 hover:bg-white rounded-lg duration-100 sm:col-span-2 md:col-span-4 lg:col-span-8"
-              href="https://github.com/Sandipeyy/NepoTuneAPI"
-            >
-              <div class="flex flex-col">
-                <span class="text-xs uppercase bg-opacity-15 rounded text-center max-w-fit px-2 py-1 font-bold tracking-wide bg-green-500 text-green-500">
-                  Source Code
-                </span>
-                <span class="text-neutral-200 font-bold text-lg sm:text-xl md:text-2xl mt-2">
-                  View on GitHub
-                </span>
-                <div class="text-neutral-500 mt-2">
-                  NepoTune API is open-source. Check out the source code on GitHub.
-                </div>
-              </div>
-            </a>
-
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contribute to NepoTune API"
-              class="card p-4 sm:p-6 hover:bg-opacity-5 hover:bg-white rounded-lg duration-100 sm:col-span-2 md:col-span-4 lg:col-span-8"
-              href="https://github.com/Sandipeyy/NepoTuneAPI/issues"
-            >
-              <div class="flex flex-col">
-                <span class="text-xs uppercase bg-opacity-15 rounded text-center max-w-fit px-2 py-1 font-bold tracking-wide bg-violet-500 text-violet-500">
-                  Contribute
-                </span>
-                <span class="text-neutral-200 font-bold text-lg sm:text-xl md:text-2xl mt-2">
-                  Get Involved
-                </span>
-                <div class="text-neutral-500 mt-2">
-                  Found a bug or have a feature idea? Open an issue or submit a
-                  pull request.
-                </div>
-              </div>
-            </a>
-
             {/* Socials */}
             <div class="card p-4 sm:p-6 hover:bg-opacity-5 hover:bg-white rounded-lg duration-100 sm:col-span-2 md:col-span-4 lg:col-span-8">
               <div class="flex flex-col">
@@ -222,7 +181,7 @@ Home.get('/', (c) => {
                 </div>
                 <div class="flex flex-row space-x-6 mt-3">
                   <a
-                    href="https://github.com/Sandipeyy"
+                    href="https://github.com/nikkexe0-del"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub Profile"
@@ -243,7 +202,7 @@ Home.get('/', (c) => {
                     <span>GitHub</span>
                   </a>
                   <a
-                    href="https://instagram.com/sandip.gg_"
+                    href="https://instagram.com/nikkk.exe"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram Profile"
@@ -278,10 +237,10 @@ Home.get('/', (c) => {
         <footer class="text-center text-gray-600 text-sm py-6 border-t border-gray-800">
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="/docs" target="_blank" rel="noopener noreferrer" class="hover:text-white">Docs</a>
-            <a href="https://github.com/Sandipeyy/NepoTuneAPI" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a>
-            <a href="https://instagram.com/sandip.gg_" target="_blank" rel="noopener noreferrer" class="hover:text-white">Instagram</a>
+            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a>
+            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="hover:text-white">Instagram</a>
           </div>
-          <p class="mt-2">© {new Date().getFullYear()} NepoTune API. All rights reserved.</p>
+          <p class="mt-2">© {new Date().getFullYear()} uvytunes. All rights reserved.</p>
         </footer>
       </body>
     </html>

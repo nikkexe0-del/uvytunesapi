@@ -1,7 +1,7 @@
 {
-  "name": "nepotune-api",
+  "name": "uvytunes",
   "version": "0.1.0",
-  "description": "Unofficial JioSaavn API",
+  "description": "Unofficial JioSaavn API - uvytunes",
   "type": "module",
   "license": "MIT",
   "repository": "https://github.com/Sandipeyy/NepoTuneAPI",

@@ -46,18 +46,18 @@ export class App {
         openapi: '3.1.0',
         info: {
           version: '1.0.0',
-          title: 'NepoTune API',
+          title: 'uvytunes',
           description: `# Introduction
           
-          NepoTune API is an unofficial JioSaavn API that provides fast, reliable access to songs, albums, artists, and playlists. 
+          uvytunes is an unofficial JioSaavn API that provides fast, reliable access to songs, albums, artists, and playlists. 
           Designed for developers, it enables high-quality music data fetching and downloading through a simple and consistent interface.`,
           contact: {
-            name: 'Sandip Gurung',
-            url: 'https://github.com/Sandipeyy/NepoTuneAPI'
+            name: 'uvytunes',
+            url: 'https://github.com/nikkexe0-del/uvytunesapi'
           },
           license: {
             name: 'MIT',
-            url: 'https://github.com/Sandipeyy/NepoTuneAPI/blob/main/LICENSE'
+            url: 'https://github.com/nikkexe0-del/uvytunesapi/blob/main/LICENSE'
           }
         },
         servers: [
@@ -72,19 +72,19 @@ export class App {
     this.app.get(
       '/docs',
       apiReference({
-        pageTitle: 'NepoTuneAPI Documentation',
+        pageTitle: 'uvytunes Documentation',
         theme: 'deepSpace',
         isEditable: false,
         layout: 'modern',
         darkMode: true,
         metaData: {
-          applicationName: 'NepoTuneAPI',
-          author: 'Sandip Gurung',
-          creator: 'Sandip Gurung',
-          publisher: 'Sandip Gurung',
+          applicationName: 'uvytunes',
+          author: 'uvytunes',
+          creator: 'uvytunes',
+          publisher: 'uvytunes',
           robots: 'index, follow',
           description:
-            'NepoTuneAPI is an unofficial wrapper written in TypeScript for JioSaavn, providing programmatic access to songs, albums, artists, playlists, and more.'
+            'uvytunes is an unofficial wrapper written in TypeScript for JioSaavn, providing programmatic access to songs, albums, artists, playlists, and more.'
         },
         url: '/swagger'
       })
