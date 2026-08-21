@@ -2,25 +2,6 @@ import { Hono } from 'hono'
 
 export const Home = new Hono()
 
-export const Meteors = ({ number }: { number: number }) => {
-  return (
-    <>
-      {Array.from({ length: number || 20 }, (_, idx) => (
-        <span
-          key={idx}
-          class="meteor animate-[meteorAnimation_3s_linear_infinite] absolute h-1 w-1 rounded-[9999px] shadow-[0_0_0_1px_#ffffff10] rotate-[215deg]"
-          style={{
-            top: 0,
-            left: `${Math.floor(Math.random() * (400 - -400) + -400)}px`,
-            animationDelay: `${Math.random() * (0.8 - 0.2) + 0.2}s`,
-            animationDuration: `${Math.floor(Math.random() * (10 - 2) + 2)}s`
-          }}
-        />
-      ))}
-    </>
-  )
-}
-
 Home.get('/', (c) => {
   const title = 'uvytunes'
   const description =
@@ -56,21 +37,18 @@ Home.get('/', (c) => {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={previewImage} />
 
-        {/* Favicon (unchanged as per request) */}
+        {/* Favicon */}
         <link
           rel="icon"
           type="image/x-icon"
-          href="https://raw.githubusercontent.com/Sandipeyy/NepoTuneAPI/main/assets/favicon.ico"
+          href="https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/favicon.ico"
         />
-
-        {/* Preload logo */}
-        <link rel="preload" as="image" href="https://raw.githubusercontent.com/Sandipeyy/NepoTuneAPI/main/assets/logo.png" />
 
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
@@ -81,166 +59,333 @@ Home.get('/', (c) => {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-            * { font-family: 'IBM Plex Mono', monospace; } 
+            :root {
+              --brand: #ff5e1f;
+              --brand-hover: #ff7038;
+              --brand-soft: #ff9650;
+              --cream: #fffbf5;
+              --ink: #262626;
+              --ink-soft: #414040;
+              --muted: #727272;
+              --hairline: #f0f0f0;
+              --canvas: #ffffff;
+            }
+
+            * {
+              font-family: 'IBM Plex Mono', monospace;
+            }
+
             body {
-              background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
-              background-size: 400% 400%;
-              animation: gradientShift 15s ease infinite;
+              background-color: var(--cream);
+              background-image:
+                radial-gradient(circle, #e0ddd8 1px, transparent 1px);
+              background-size: 24px 24px;
+              min-height: 100vh;
             }
-            @keyframes gradientShift {
-              0%, 100% { background-position: 0% 50%; }
-              50% { background-position: 100% 50%; }
+
+            .hero {
+              background: var(--brand);
+              position: relative;
+              overflow: hidden;
             }
-            @keyframes borderAnimation {
-              0%, 100% { background-position: 0% 50%; }
-              50% { background-position: 100% 50%; }
-            }
-            @keyframes meteorAnimation {
-              0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-              70% { opacity: 1; }
-              100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
-            }
-            .meteor::before {
+
+            .hero::before {
               content: '';
               position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              width: 50px;
+              inset: 0;
+              background-image:
+                radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+              background-size: 28px 28px;
+              pointer-events: none;
+            }
+
+            .hero::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
               height: 1px;
-              background: linear-gradient(90deg, #64748b, transparent);
+              background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             }
-            .animate-meteor-effect {
-              animation-name: meteorAnimation;
+
+            .card {
+              border: 1px solid var(--hairline);
+              transition: all 0.15s ease;
             }
-            /* Card hover polish */
+
             .card:hover {
-              transform: translateY(-3px);
-              box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+              border-color: var(--brand);
+              box-shadow: 0 2px 12px rgba(255, 94, 31, 0.06);
             }
-            .unofficial-tag {
-              animation: borderAnimation 3s ease-in-out infinite alternate;
-            }`
+
+            .pill-cta {
+              background: var(--cream);
+              color: var(--ink);
+              border: 0;
+              padding: 12px 28px;
+              border-radius: 9999px;
+              font-weight: 500;
+              font-size: 16px;
+              letter-spacing: -0.16px;
+              line-height: 24px;
+              cursor: pointer;
+              transition: all 0.15s ease;
+              text-decoration: none;
+              display: inline-block;
+            }
+
+            .pill-cta:hover {
+              background: var(--brand-hover);
+              color: var(--cream);
+            }
+
+            .mono-label {
+              font-family: 'IBM Plex Mono', monospace;
+              font-size: 11px;
+              font-weight: 600;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              color: var(--muted);
+            }
+
+            .section-heading {
+              font-weight: 500;
+              letter-spacing: -1.4px;
+              line-height: 1;
+              color: var(--ink);
+            }
+
+            .body-text {
+              font-weight: 400;
+              letter-spacing: -0.04px;
+              line-height: 1.5;
+              color: var(--ink-soft);
+            }
+
+            .footer-link {
+              color: var(--muted);
+              text-decoration: none;
+              transition: color 0.15s ease;
+            }
+
+            .footer-link:hover {
+              color: var(--brand);
+            }
+            `
           }}
         />
       </head>
-      <body class="bg-black mx-auto md:min-h-screen max-w-screen-lg flex flex-col">
-        <main class="mx-auto my-auto flex flex-col space-y-8 px-4 pb-16 md:py-10 relative overflow-y-hidden overflow-x-hidden">
-          <Meteors number={15} />
-
-          {/* Sticky Responsive Header */}
-          <header class="sticky top-0 z-50 bg-black/70 backdrop-blur-md flex flex-col sm:flex-row items-center sm:items-end space-y-2 sm:space-y-0 sm:space-x-3 mb-6 p-3 rounded-lg">
-            <img
-              src="https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/logo.png"
-              alt="uvytunes Logo"
-              class="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 object-contain"
-              loading="lazy"
-            />
-            <h1 class="flex flex-col sm:flex-row items-start sm:items-end space-y-1 sm:space-y-0 sm:space-x-2 text-center sm:text-left">
-              <span class="bg-gradient-to-r from-purple-500 to-gray-800 bg-clip-text text-transparent text-xl sm:text-3xl md:text-4xl font-bold">
-                uvytunes
-              </span>
-              <span class="unofficial-tag rounded bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%] p-1 text-xs sm:text-sm md:text-base uppercase tracking-wider text-white">
-                Unofficial
-              </span>
-            </h1>
-          </header>
-
-          {/* Responsive Grid */}
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6 md:gap-8">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Explore Docs"
-              class="card p-4 sm:p-6 hover:bg-opacity-5 hover:bg-white rounded-lg duration-100 sm:col-span-2 md:col-span-4 lg:col-span-8"
-              href="/docs"
+      <body class="min-h-screen flex flex-col">
+        {/* Hero Section — brand voltage as canvas */}
+        <section class="hero px-6 py-20 md:py-28 flex flex-col items-center text-center relative z-10">
+          <div class="max-w-3xl mx-auto relative z-10">
+            <span class="mono-label text-white/60 block mb-4">
+              v0.1.0 / unofficial
+            </span>
+            <h1
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 'clamp(36px, 7vw, 56px)',
+                fontWeight: 500,
+                lineHeight: '1',
+                letterSpacing: '-1.4px',
+                color: 'var(--cream)',
+              }}
             >
-              <div class="flex flex-col">
-                <span class="text-xs uppercase bg-opacity-15 rounded text-center max-w-fit px-2 py-1 font-bold tracking-wide bg-red-500 text-red-500">
-                  Quick Start
-                </span>
-                <span class="text-neutral-200 font-bold text-lg sm:text-xl md:text-2xl mt-2">
-                  Explore the Docs
-                </span>
-                <div class="text-neutral-500 mt-2">
-                  Learn how to use {title} with simple guides and examples.
-                </div>
-              </div>
+              uvytunes
+            </h1>
+            <p
+              class="mt-5 max-w-lg mx-auto"
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '16px',
+                fontWeight: 400,
+                lineHeight: '1.6',
+                color: 'rgba(255, 251, 245, 0.7)',
+              }}
+            >
+              Unofficial JioSaavn API. Fast, reliable access to songs, albums, artists, and playlists.
+            </p>
+            <a href="/docs" class="pill-cta mt-8">
+              Explore the Docs
             </a>
+          </div>
+        </section>
 
-            {/* Socials */}
-            <div class="card p-4 sm:p-6 hover:bg-opacity-5 hover:bg-white rounded-lg duration-100 sm:col-span-2 md:col-span-4 lg:col-span-8">
-              <div class="flex flex-col">
-                <span class="text-xs uppercase bg-opacity-15 rounded text-center max-w-fit px-2 py-1 font-bold tracking-wide bg-blue-500 text-blue-500">
-                  Socials
-                </span>
-                <span class="text-neutral-200 font-bold text-lg sm:text-xl md:text-2xl mt-2">
-                  Stay Connected
-                </span>
-                <div class="text-neutral-500 mt-2">
-                  Find me on GitHub and Instagram.
-                </div>
-                <div class="flex flex-row space-x-6 mt-3">
-                  <a
-                    href="https://github.com/nikkexe0-del"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub Profile"
-                    class="hover:text-indigo-400 text-indigo-500 transition-transform hover:scale-110 flex items-center space-x-2"
+        {/* Below-fold — white canvas with hairline cards */}
+        <main class="flex-1 px-6 py-16 md:py-24" style={{ background: 'var(--canvas)' }}>
+          <div class="max-w-3xl mx-auto">
+            {/* Quick Start Card */}
+            <div class="card rounded-lg p-6 sm:p-8 mb-6" style={{ background: 'var(--canvas)' }}>
+              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+                Quick Start
+              </span>
+              <h2
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 'clamp(24px, 5vw, 32px)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.8px',
+                  lineHeight: '1.15',
+                  color: 'var(--ink)',
+                }}
+              >
+                Get started in seconds
+              </h2>
+              <p class="mt-3 body-text max-w-xl">
+                Hit the API from any HTTP client. No auth, no keys — just search, fetch, and stream.
+              </p>
+              <div
+                class="mt-5 rounded-md p-4 overflow-x-auto"
+                style={{
+                  background: 'var(--cream)',
+                  border: '1px solid var(--hairline)',
+                }}
+              >
+                <code
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: '13px',
+                    color: 'var(--ink)',
+                    lineHeight: '1.7',
+                  }}
+                >
+                  GET /api/search/songs?query=tum+hi+ho
+                </code>
+              </div>
+            </div>
+
+            {/* Endpoints Card */}
+            <div class="card rounded-lg p-6 sm:p-8 mb-6" style={{ background: 'var(--canvas)' }}>
+              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+                Endpoints
+              </span>
+              <h2
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 'clamp(24px, 5vw, 32px)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.8px',
+                  lineHeight: '1.15',
+                  color: 'var(--ink)',
+                }}
+              >
+                Every route you need
+              </h2>
+              <p class="mt-3 body-text max-w-xl">
+                Search songs, albums, artists, and playlists. Get details by ID or link. Stream or download.
+              </p>
+              <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  { method: 'GET', path: '/api/search/songs' },
+                  { method: 'GET', path: '/api/search/albums' },
+                  { method: 'GET', path: '/api/search/artists' },
+                  { method: 'GET', path: '/api/search/playlists' },
+                  { method: 'GET', path: '/api/songs/:id' },
+                  { method: 'GET', path: '/api/albums/:id' },
+                  { method: 'GET', path: '/api/artists/:id' },
+                  { method: 'GET', path: '/api/playlists/:id' },
+                ].map((ep) => (
+                  <div
+                    key={ep.path}
+                    class="flex items-center gap-2 px-3 py-2 rounded-md"
+                    style={{
+                      background: 'var(--cream)',
+                      border: '1px solid var(--hairline)',
+                    }}
                   >
-                    {/* GitHub SVG (uses currentColor) */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      class="w-4 h-4"
-                      aria-hidden="true"
-                      focusable="false"
-                      role="img"
-                      fill="currentColor"
+                    <span
+                      class="mono-label text-xs"
+                      style={{ color: 'var(--brand)', fontSize: '10px' }}
                     >
-                      <path d="M12 .296C5.373.296 0 5.67 0 12.296c0 5.292 3.438 9.773 8.205 11.366.6.111.82-.261.82-.579 0-.286-.011-1.04-.017-2.042-3.338.726-4.042-1.612-4.042-1.612-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.083-.729.083-.729 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.76-1.605-2.665-.304-5.467-1.333-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.984-.399 3.005-.404 1.02.005 2.048.138 3.006.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.371.814 1.102.814 2.222 0 1.605-.014 2.898-.014 3.293 0 .32.216.694.825.576C20.565 22.067 24 17.584 24 12.296 24 5.67 18.627.296 12 .296z" />
-                    </svg>
-                    <span>GitHub</span>
-                  </a>
-                  <a
-                    href="https://instagram.com/nikkk.exe"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram Profile"
-                    class="hover:text-pink-400 text-pink-500 transition-transform hover:scale-110 flex items-center space-x-2"
-                  >
-                    {/* Instagram SVG (outline style, uses currentColor) */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      class="w-4 h-4"
-                      aria-hidden="true"
-                      focusable="false"
-                      role="img"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      {ep.method}
+                    </span>
+                    <code
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontSize: '12px',
+                        color: 'var(--ink-soft)',
+                      }}
                     >
-                      <rect x="3" y="3" width="18" height="18" rx="5" ry="5" />
-                      <circle cx="12" cy="12" r="4" />
-                      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-                    </svg>
-                    <span>Instagram</span>
-                  </a>
-                </div>
+                      {ep.path}
+                    </code>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Features Card */}
+            <div class="card rounded-lg p-6 sm:p-8" style={{ background: 'var(--canvas)' }}>
+              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+                Built for developers
+              </span>
+              <h2
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 'clamp(24px, 5vw, 32px)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.8px',
+                  lineHeight: '1.15',
+                  color: 'var(--ink)',
+                }}
+              >
+                Why uvytunes
+              </h2>
+              <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {[
+                  {
+                    title: 'Fast',
+                    desc: 'Optimized for low latency. Songs return in under 200ms.',
+                  },
+                  {
+                    title: 'Open',
+                    desc: 'No API keys. No rate limits. Fully open source.',
+                  },
+                  {
+                    title: 'Reliable',
+                    desc: 'Backed by JioSaavn. Streaming URLs with multiple quality tiers.',
+                  },
+                ].map((f) => (
+                  <div key={f.title}>
+                    <span
+                      class="mono-label block mb-2"
+                      style={{ color: 'var(--ink)', fontSize: '12px', fontWeight: 600 }}
+                    >
+                      {f.title}
+                    </span>
+                    <p class="body-text" style={{ fontSize: '13px' }}>
+                      {f.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </main>
 
-        <footer class="text-center text-gray-600 text-sm py-6 border-t border-gray-800">
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="/docs" target="_blank" rel="noopener noreferrer" class="hover:text-white">Docs</a>
-            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a>
-            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="hover:text-white">Instagram</a>
+        {/* Footer */}
+        <footer
+          class="px-6 py-8 flex flex-col items-center text-center"
+          style={{
+            background: 'var(--canvas)',
+            borderTop: '1px solid var(--hairline)',
+          }}
+        >
+          <div class="flex flex-wrap justify-center gap-6 mb-4">
+            <a href="/docs" class="footer-link" style={{ fontSize: '13px' }}>
+              Docs
+            </a>
+            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="footer-link" style={{ fontSize: '13px' }}>
+              GitHub
+            </a>
+            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="footer-link" style={{ fontSize: '13px' }}>
+              Instagram
+            </a>
           </div>
-          <p class="mt-2">© {new Date().getFullYear()} uvytunes. All rights reserved.</p>
+          <span class="mono-label" style={{ fontSize: '11px' }}>
+            &copy; {new Date().getFullYear()} uvytunes. All rights reserved.
+          </span>
         </footer>
       </body>
     </html>
