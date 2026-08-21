@@ -6,8 +6,6 @@
   "license": "MIT",
   "repository": "https://github.com/Sandipeyy/NepoTuneAPI",
   "author": "Sandip Gurung",
-  "main": "dist/server.js",
-  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     "require": "./dist/index.js",
