@@ -11,382 +11,442 @@ Home.get('/', (c) => {
   const siteUrl = 'https://uvytunesapi.vercel.app/'
 
   return c.html(
-    <html lang="en">
+    <html lang="en" class="light">
       <head>
         <title>{title}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {/* SEO */}
         <meta name="description" content={description} />
         <meta name="keywords" content="uvytunes, JioSaavn API, Music API, uvytunes API, Songs, Albums, Playlists" />
         <meta name="author" content="uvytunes" />
         <link rel="canonical" href={siteUrl} />
-
-        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={previewImage} />
-
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content={siteUrl} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={previewImage} />
+        <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/favicon.ico" />
 
-        {/* Favicon */}
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href="https://raw.githubusercontent.com/nikkexe0-del/uvytunesapi/main/assets/favicon.ico"
-        />
-
-        {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Tailwind */}
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <script src="https://cdn.tailwindcss.com" />
 
-        {/* Custom Styles */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-            :root {
-              --brand: #ff5e1f;
-              --brand-hover: #ff7038;
-              --brand-soft: #ff9650;
-              --cream: #fffbf5;
-              --ink: #262626;
-              --ink-soft: #414040;
-              --muted: #727272;
-              --hairline: #f0f0f0;
-              --canvas: #ffffff;
-            }
+        <style>
+          :root {
+            --bg: #f5f4f0;
+            --bg-card: #ffffff;
+            --bg-inset: #eeecea;
+            --dot: #d6d4ce;
+            --text: #1a1a1a;
+            --text-soft: #4a4a4a;
+            --text-muted: #8a8a8a;
+            --border: #e2e0dc;
+            --accent: #1a1a1a;
+            --accent-hover: #333333;
+            --accent-fg: #f5f4f0;
+            --hero-bg: #1a1a1a;
+            --hero-fg: #f5f4f0;
+            --hero-dot: rgba(255,255,255,0.06);
+            --hero-dot-border: rgba(255,255,255,0.1);
+            --toggle-bg: #e2e0dc;
+            --toggle-knob: #ffffff;
+            --tag-bg: #eeecea;
+            --tag-text: #4a4a4a;
+          }
 
-            * {
-              font-family: 'IBM Plex Mono', monospace;
-            }
+          .dark {
+            --bg: #0e0e0e;
+            --bg-card: #161616;
+            --bg-inset: #1e1e1e;
+            --dot: #222222;
+            --text: #e8e8e8;
+            --text-soft: #a0a0a0;
+            --text-muted: #666666;
+            --border: #262626;
+            --accent: #e8e8e8;
+            --accent-hover: #cccccc;
+            --accent-fg: #0e0e0e;
+            --hero-bg: #e8e8e8;
+            --hero-fg: #0e0e0e;
+            --hero-dot: rgba(0,0,0,0.06);
+            --hero-dot-border: rgba(0,0,0,0.1);
+            --toggle-bg: #262626;
+            --toggle-knob: #e8e8e8;
+            --tag-bg: #222222;
+            --tag-text: #a0a0a0;
+          }
 
-            body {
-              background-color: var(--cream);
-              background-image:
-                radial-gradient(circle, #e0ddd8 1px, transparent 1px);
-              background-size: 24px 24px;
-              min-height: 100vh;
-            }
+          * { font-family: 'IBM Plex Mono', monospace; margin: 0; padding: 0; box-sizing: border-box; }
 
-            .hero {
-              background: var(--brand);
-              position: relative;
-              overflow: hidden;
-            }
+          body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text);
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+          }
 
-            .hero::before {
-              content: '';
-              position: absolute;
-              inset: 0;
-              background-image:
-                radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
-              background-size: 28px 28px;
-              pointer-events: none;
-            }
+          .hero {
+            background: var(--hero-bg);
+            color: var(--hero-fg);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, color 0.3s;
+          }
 
-            .hero::after {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              height: 1px;
-              background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            }
+          .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, var(--hero-dot) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            pointer-events: none;
+          }
 
-            .card {
-              border: 1px solid var(--hairline);
-              transition: all 0.15s ease;
-            }
+          .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+          }
 
-            .card:hover {
-              border-color: var(--brand);
-              box-shadow: 0 2px 12px rgba(255, 94, 31, 0.06);
-            }
+          .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+          }
 
-            .pill-cta {
-              background: var(--cream);
-              color: var(--ink);
-              border: 0;
-              padding: 12px 28px;
-              border-radius: 9999px;
-              font-weight: 500;
-              font-size: 16px;
-              letter-spacing: -0.16px;
-              line-height: 24px;
-              cursor: pointer;
-              transition: all 0.15s ease;
-              text-decoration: none;
-              display: inline-block;
-            }
+          .dark .card:hover {
+            box-shadow: 0 2px 16px rgba(255,255,255,0.03);
+          }
 
-            .pill-cta:hover {
-              background: var(--brand-hover);
-              color: var(--cream);
-            }
+          .pill {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: -0.14px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            border: 0;
+          }
 
-            .mono-label {
-              font-family: 'IBM Plex Mono', monospace;
-              font-size: 11px;
-              font-weight: 600;
-              letter-spacing: 0.08em;
-              text-transform: uppercase;
-              color: var(--muted);
-            }
+          .pill-primary {
+            background: var(--accent);
+            color: var(--accent-fg);
+          }
 
-            .section-heading {
-              font-weight: 500;
-              letter-spacing: -1.4px;
-              line-height: 1;
-              color: var(--ink);
-            }
+          .pill-primary:hover {
+            background: var(--accent-hover);
+          }
 
-            .body-text {
-              font-weight: 400;
-              letter-spacing: -0.04px;
-              line-height: 1.5;
-              color: var(--ink-soft);
-            }
+          .mono-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+          }
 
-            .footer-link {
-              color: var(--muted);
-              text-decoration: none;
-              transition: color 0.15s ease;
-            }
+          .heading-display {
+            font-weight: 500;
+            letter-spacing: -1.4px;
+            line-height: 1;
+            color: var(--text);
+          }
 
-            .footer-link:hover {
-              color: var(--brand);
-            }
-            `
-          }}
-        />
+          .body-text {
+            font-weight: 400;
+            letter-spacing: -0.04px;
+            line-height: 1.6;
+            color: var(--text-soft);
+          }
+
+          .code-block {
+            background: var(--bg-inset);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--text);
+            overflow-x: auto;
+          }
+
+          .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+          }
+
+          .endpoint-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: var(--bg-inset);
+            border: 1px solid var(--border);
+          }
+
+          .endpoint-method {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 32px;
+          }
+
+          .endpoint-path {
+            font-size: 12px;
+            color: var(--text-soft);
+          }
+
+          .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.15s ease;
+          }
+
+          .footer-link:hover {
+            color: var(--accent);
+          }
+
+          /* Theme Toggle */
+          .toggle-wrap {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+          }
+
+          .toggle-btn {
+            width: 52px;
+            height: 28px;
+            border-radius: 9999px;
+            background: var(--toggle-bg);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+          }
+
+          .toggle-knob {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--toggle-knob);
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+          }
+
+          .dark .toggle-knob {
+            transform: translateX(24px);
+          }
+
+          .toggle-icon {
+            width: 12px;
+            height: 12px;
+          }
+        </style>
       </head>
-      <body class="min-h-screen flex flex-col">
-        {/* Hero Section — brand voltage as canvas */}
-        <section class="hero px-6 py-20 md:py-28 flex flex-col items-center text-center relative z-10">
-          <div class="max-w-3xl mx-auto relative z-10">
-            <span class="mono-label text-white/60 block mb-4">
-              v0.1.0 / unofficial
+      <body>
+        {/* Theme Toggle */}
+        <div class="toggle-wrap">
+          <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+            <div class="toggle-knob">
+              <svg class="toggle-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+              </svg>
+              <svg class="toggle-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        {/* Hero */}
+        <section class="hero py-20 md:py-28 px-6 flex flex-col items-center text-center">
+          <div class="max-w-2xl mx-auto relative z-10">
+            <span class="mono-label block mb-5" style={{ color: 'var(--hero-fg)', opacity: 0.5 }}>
+              v0.1.0 — unofficial
             </span>
             <h1
+              class="heading-display"
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: 'clamp(36px, 7vw, 56px)',
-                fontWeight: 500,
-                lineHeight: '1',
-                letterSpacing: '-1.4px',
-                color: 'var(--cream)',
+                fontSize: 'clamp(40px, 8vw, 64px)',
+                color: 'var(--hero-fg)',
               }}
             >
               uvytunes
             </h1>
             <p
-              class="mt-5 max-w-lg mx-auto"
+              class="mt-5 max-w-md mx-auto"
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '16px',
-                fontWeight: 400,
-                lineHeight: '1.6',
-                color: 'rgba(255, 251, 245, 0.7)',
+                fontSize: '15px',
+                color: 'var(--hero-fg)',
+                opacity: 0.6,
+                lineHeight: '1.7',
               }}
             >
-              Unofficial JioSaavn API. Fast, reliable access to songs, albums, artists, and playlists.
+              Unofficial JioSaavn API. Search, stream, and download songs, albums, artists, and playlists.
             </p>
-            <a href="/docs" class="pill-cta mt-8">
+            <a href="/docs" class="pill pill-primary mt-8">
               Explore the Docs
             </a>
           </div>
         </section>
 
-        {/* Below-fold — white canvas with hairline cards */}
-        <main class="flex-1 px-6 py-16 md:py-24" style={{ background: 'var(--canvas)' }}>
-          <div class="max-w-3xl mx-auto">
-            {/* Quick Start Card */}
-            <div class="card rounded-lg p-6 sm:p-8 mb-6" style={{ background: 'var(--canvas)' }}>
-              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+        {/* Content */}
+        <main class="px-6 py-16 md:py-24">
+          <div class="max-w-2xl mx-auto space-y-6">
+
+            {/* Quick Start */}
+            <div class="card rounded-lg p-6 sm:p-8">
+              <span class="mono-label block mb-3" style={{ color: 'var(--accent)' }}>
                 Quick Start
               </span>
-              <h2
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 'clamp(24px, 5vw, 32px)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.8px',
-                  lineHeight: '1.15',
-                  color: 'var(--ink)',
-                }}
-              >
+              <h2 class="heading-display" style={{ fontSize: 'clamp(22px, 4vw, 30px)' }}>
                 Get started in seconds
               </h2>
-              <p class="mt-3 body-text max-w-xl">
-                Hit the API from any HTTP client. No auth, no keys — just search, fetch, and stream.
+              <p class="mt-3 body-text max-w-lg">
+                Hit the API from any HTTP client. No auth required — just search, fetch, and stream.
               </p>
-              <div
-                class="mt-5 rounded-md p-4 overflow-x-auto"
-                style={{
-                  background: 'var(--cream)',
-                  border: '1px solid var(--hairline)',
-                }}
-              >
-                <code
-                  style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: '13px',
-                    color: 'var(--ink)',
-                    lineHeight: '1.7',
-                  }}
-                >
-                  GET /api/search/songs?query=tum+hi+ho
-                </code>
+              <div class="code-block mt-5">
+                GET /api/search/songs?query=tum+hi+ho
               </div>
             </div>
 
-            {/* Endpoints Card */}
-            <div class="card rounded-lg p-6 sm:p-8 mb-6" style={{ background: 'var(--canvas)' }}>
-              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+            {/* Endpoints */}
+            <div class="card rounded-lg p-6 sm:p-8">
+              <span class="mono-label block mb-3" style={{ color: 'var(--accent)' }}>
                 Endpoints
               </span>
-              <h2
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 'clamp(24px, 5vw, 32px)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.8px',
-                  lineHeight: '1.15',
-                  color: 'var(--ink)',
-                }}
-              >
+              <h2 class="heading-display" style={{ fontSize: 'clamp(22px, 4vw, 30px)' }}>
                 Every route you need
               </h2>
-              <p class="mt-3 body-text max-w-xl">
-                Search songs, albums, artists, and playlists. Get details by ID or link. Stream or download.
+              <p class="mt-3 body-text max-w-lg">
+                Search, browse, and stream — all in one API.
               </p>
-              <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {[
-                  { method: 'GET', path: '/api/search/songs' },
-                  { method: 'GET', path: '/api/search/albums' },
-                  { method: 'GET', path: '/api/search/artists' },
-                  { method: 'GET', path: '/api/search/playlists' },
-                  { method: 'GET', path: '/api/songs/:id' },
-                  { method: 'GET', path: '/api/albums/:id' },
-                  { method: 'GET', path: '/api/artists/:id' },
-                  { method: 'GET', path: '/api/playlists/:id' },
-                ].map((ep) => (
-                  <div
-                    key={ep.path}
-                    class="flex items-center gap-2 px-3 py-2 rounded-md"
-                    style={{
-                      background: 'var(--cream)',
-                      border: '1px solid var(--hairline)',
-                    }}
-                  >
-                    <span
-                      class="mono-label text-xs"
-                      style={{ color: 'var(--brand)', fontSize: '10px' }}
-                    >
-                      {ep.method}
-                    </span>
-                    <code
-                      style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
-                        fontSize: '12px',
-                        color: 'var(--ink-soft)',
-                      }}
-                    >
-                      {ep.path}
-                    </code>
+                  '/api/search/songs',
+                  '/api/search/albums',
+                  '/api/search/artists',
+                  '/api/search/playlists',
+                  '/api/songs/:id',
+                  '/api/albums/:id',
+                  '/api/artists/:id',
+                  '/api/playlists/:id',
+                ].map((path) => (
+                  <div class="endpoint-row" key={path}>
+                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-path">{path}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Features Card */}
-            <div class="card rounded-lg p-6 sm:p-8" style={{ background: 'var(--canvas)' }}>
-              <span class="mono-label block mb-3" style={{ color: 'var(--brand)' }}>
+            {/* Features */}
+            <div class="card rounded-lg p-6 sm:p-8">
+              <span class="mono-label block mb-3" style={{ color: 'var(--accent)' }}>
                 Built for developers
               </span>
-              <h2
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 'clamp(24px, 5vw, 32px)',
-                  fontWeight: 500,
-                  letterSpacing: '-0.8px',
-                  lineHeight: '1.15',
-                  color: 'var(--ink)',
-                }}
-              >
+              <h2 class="heading-display" style={{ fontSize: 'clamp(22px, 4vw, 30px)' }}>
                 Why uvytunes
               </h2>
-              <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: 'Fast',
-                    desc: 'Optimized for low latency. Songs return in under 200ms.',
-                  },
-                  {
-                    title: 'Open',
-                    desc: 'No API keys. No rate limits. Fully open source.',
-                  },
-                  {
-                    title: 'Reliable',
-                    desc: 'Backed by JioSaavn. Streaming URLs with multiple quality tiers.',
-                  },
-                ].map((f) => (
-                  <div key={f.title}>
-                    <span
-                      class="mono-label block mb-2"
-                      style={{ color: 'var(--ink)', fontSize: '12px', fontWeight: 600 }}
-                    >
-                      {f.title}
-                    </span>
-                    <p class="body-text" style={{ fontSize: '13px' }}>
-                      {f.desc}
-                    </p>
-                  </div>
-                ))}
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div>
+                  <span class="tag mb-2 block">Fast</span>
+                  <p class="body-text" style={{ fontSize: '13px' }}>
+                    Optimized for low latency. Songs return in under 200ms.
+                  </p>
+                </div>
+                <div>
+                  <span class="tag mb-2 block">Open</span>
+                  <p class="body-text" style={{ fontSize: '13px' }}>
+                    No API keys. No rate limits. Fully open source.
+                  </p>
+                </div>
+                <div>
+                  <span class="tag mb-2 block">Reliable</span>
+                  <p class="body-text" style={{ fontSize: '13px' }}>
+                    Backed by JioSaavn. Multiple quality tiers for streaming.
+                  </p>
+                </div>
               </div>
             </div>
+
           </div>
         </main>
 
         {/* Footer */}
         <footer
           class="px-6 py-8 flex flex-col items-center text-center"
-          style={{
-            background: 'var(--canvas)',
-            borderTop: '1px solid var(--hairline)',
-          }}
+          style={{ borderTop: '1px solid var(--border)' }}
         >
           <div class="flex flex-wrap justify-center gap-6 mb-4">
-            <a href="/docs" class="footer-link" style={{ fontSize: '13px' }}>
-              Docs
-            </a>
-            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="footer-link" style={{ fontSize: '13px' }}>
-              GitHub
-            </a>
-            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="footer-link" style={{ fontSize: '13px' }}>
-              Instagram
-            </a>
+            <a href="/docs" class="footer-link">Docs</a>
+            <a href="https://github.com/nikkexe0-del" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+            <a href="https://instagram.com/nikkk.exe" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
           </div>
           <span class="mono-label" style={{ fontSize: '11px' }}>
-            &copy; {new Date().getFullYear()} uvytunes. All rights reserved.
+            &copy; {new Date().getFullYear()} uvytunes
           </span>
         </footer>
+
+        <script dangerouslySetInnerHTML={{ __html: `
+          function toggleTheme() {
+            const html = document.documentElement;
+            const sun = document.querySelector('.sun-icon');
+            const moon = document.querySelector('.moon-icon');
+            if (html.classList.contains('dark')) {
+              html.classList.remove('dark');
+              html.classList.add('light');
+              sun.style.display = '';
+              moon.style.display = 'none';
+              localStorage.setItem('theme', 'light');
+            } else {
+              html.classList.remove('light');
+              html.classList.add('dark');
+              sun.style.display = 'none';
+              moon.style.display = '';
+              localStorage.setItem('theme', 'dark');
+            }
+          }
+          (function() {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            const html = document.documentElement;
+            const sun = document.querySelector('.sun-icon');
+            const moon = document.querySelector('.moon-icon');
+            html.classList.remove('light', 'dark');
+            html.classList.add(theme);
+            if (theme === 'dark') { sun.style.display = 'none'; moon.style.display = ''; }
+          })();
+        ` }} />
       </body>
     </html>
   )
