@@ -1,10 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [{ "source": "(.*)", "destination": "/api" }],
+  "framework": "node",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
   "regions": ["bom1"],
   "headers": [
     {
-      "source": "(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
@@ -21,14 +24,6 @@
         {
           "key": "Cache-Control",
           "value": "s-maxage=300, stale-while-revalidate"
-        },
-        {
-          "key": "Author",
-          "value": "Sandip Gurung"
-        },
-        {
-          "key": "Github",
-          "value": "https://github.com/Sandipeyy/NepoTuneAPI"
         }
       ]
     }
