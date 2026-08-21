@@ -50,6 +50,33 @@ body {
 
 .card:hover { border-color: #333333; }
 
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.14px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: 0;
+}
+
+.pill-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.pill-outline:hover {
+  border-color: var(--accent);
+  background: var(--bg-inset);
+}
+
 .mono-label {
   font-size: 11px;
   font-weight: 600;
@@ -163,10 +190,21 @@ body {
               <i data-lucide="arrow-left" class="icon-sm"></i>
               Back
             </a>
-            <h1 class="heading-display page-heading mt-4">Operations</h1>
-            <p class="mt-3 body-text max-w-lg">
-              Every endpoint available in the uvytunes API. All requests are GET.
-            </p>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mt-4">
+              <div>
+                <h1 class="heading-display page-heading">Operations</h1>
+                <p class="mt-3 body-text max-w-lg">
+                  Every endpoint available in the uvytunes API. All requests are GET.
+                </p>
+              </div>
+              <button
+                onclick="downloadDocs()"
+                class="pill pill-outline inline-flex items-center gap-2 whitespace-nowrap"
+              >
+                <i data-lucide="download" class="icon-sm"></i>
+                Save as JSON
+              </button>
+            </div>
           </div>
         </section>
 
@@ -338,7 +376,24 @@ body {
           </div>
         </footer>
 
-        <script dangerouslySetInnerHTML={{ __html: `lucide.createIcons();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          lucide.createIcons();
+          function downloadDocs() {
+            fetch('/api/docs/json')
+              .then(function(r) { return r.json(); })
+              .then(function(data) {
+                var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'uvytunes-api-docs.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              });
+          }
+        ` }} />
       </body>
     </html>
   )
